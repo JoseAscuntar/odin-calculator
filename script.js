@@ -32,6 +32,32 @@ function operate(a, operator, b) {
 }
 
 function resolve() {
+    if (currentOperator === "div" && operands[1] === "0") {
+        let everything = document.querySelectorAll("*"); 
+        let body = document.querySelector("body"); 
+        let all = body.querySelectorAll("*");
+        let niceTry = document.createElement("h1");
+        let previousContent = screen.textContent; 
+        let previousOperator = currentOperator;
+
+        all.forEach((element) => element.classList.toggle("hidden"));
+        body.style.backgroundColor = "#FFCCCC";
+        niceTry.textContent = "Nice try buddy!";
+        niceTry.id = "niceTry";
+        body.appendChild(niceTry);
+
+        setTimeout(() => {
+            body.removeChild(niceTry);
+            body.style.backgroundColor = "white";
+            screen.textContent = previousContent; // So that it restarts exactly 
+            // as it was before the second operator (other than div by 0 was 
+            // clicked
+            currentOperator = previousOperator;
+            all.forEach((element) => element.classList.toggle("hidden"));
+
+        }, 2000);
+        return;
+    } 
     let result = operate(operands[0], currentOperator, operands[1]);
     screen.textContent = result; 
     operands[0] = result;

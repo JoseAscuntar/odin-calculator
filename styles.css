@@ -55,3 +55,14 @@ body {
 #AC {
     flex: 3.45;
 }
+
+.hidden{
+    display: none !important;
+}
+
+#niceTry {
+    font-family:'Courier New', Courier, monospace ;
+    font-size: 100px;
+    font-weight: 400;
+    color: black;
+}
