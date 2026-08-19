@@ -5,3 +5,6 @@ numbers.forEach(number => {
         screen.textContent += number.textContent;
     });
 });
+
+const ac = document.querySelector("#AC");
+ac.addEventListener('click', () => screen.textContent = "");
