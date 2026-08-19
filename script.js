@@ -8,3 +8,16 @@ numbers.forEach(number => {
 
 const ac = document.querySelector("#AC");
 ac.addEventListener('click', () => screen.textContent = "");
+
+function operate(a, operator, b) {
+    switch (operator) {
+        case "add":
+            return a + b;
+        case "minus":
+            return a - b;
+        case "div":
+            return a / b;
+        case "mult":
+            return a * b;
+    }
+}
