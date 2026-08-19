@@ -1,3 +1,4 @@
+const DECIMAL_FIGURES = 10;
 let operands = ["", ""]; // Will literally only take 2 values, but looks nicer 
 // in array
 let currentOperator = "";
@@ -65,7 +66,7 @@ function resolve() {
     if (Number.isInteger(Number(screen.textContent.at(-1)))){ // is the 
         // last character on screen an integer?
         let result = operate(operands[0], currentOperator, operands[1]);
-        screen.textContent = result; 
+        screen.textContent = Number(result.toFixed(DECIMAL_FIGURES)); 
         operands[0] = result;
         currentOperator = "";
         operands[1] = "";
