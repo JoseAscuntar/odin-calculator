@@ -1,23 +1,50 @@
+let operands = ["", ""]; // Will literally only take 2 values, but looks nicer 
+// in array
+let currentOperator = "";
+
 const screen = document.querySelector("#screen");
 const numbers = document.querySelectorAll(".number");
 numbers.forEach(number => {
     number.addEventListener("click", () => {
+        operands[currentOperator === "" ? 0 : 1] += number.textContent;
         screen.textContent += number.textContent;
+        console.log(operands);
     });
 });
 
+const operators = document.querySelectorAll(".operator");
+operators.forEach(operator => {
+    operator.addEventListener("click", () => {
+        if (currentOperator === "") {
+            screen.textContent += operator.textContent;
+        } else {
+            let result = operate(operands[0], currentOperator, operands[1]);
+            screen.textContent = result + operator.textContent; 
+            console.log(operands[0], currentOperator, operands[1]);
+            operands[0] = result;
+            operands[1] = "";
+        }
+        currentOperator = operator.id;
+    });
+});
+
+
 const ac = document.querySelector("#AC");
-ac.addEventListener('click', () => screen.textContent = "");
+ac.addEventListener('click', () => {
+    screen.textContent = "";
+    operands = ["", ""];
+    currentOperator = "";
+});
 
 function operate(a, operator, b) {
     switch (operator) {
         case "add":
-            return a + b;
+            return Number(a) + Number(b);
         case "minus":
-            return a - b;
+            return Number(a) - Number(b);
         case "div":
-            return a / b;
+            return Number(a) / Number(b);
         case "mult":
-            return a * b;
+            return Number(a) * Number(b);
     }
 }
