@@ -42,8 +42,14 @@ function resolve() {
 const operators = document.querySelectorAll(".operator");
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
+        console.log(screen.textContent)
         if (currentOperator !== "") {
-            resolve();   
+            if (Number.isInteger(Number(screen.textContent.at(-1)))){ // is the 
+                // last character on screen an integer?
+                resolve();
+            } else {
+                screen.textContent = screen.textContent.slice(0, -1);
+            }
         }
         screen.textContent += operator.textContent;
         currentOperator = operator.id;
