@@ -34,7 +34,8 @@ function operate(a, operator, b) {
 }
 
 function resolve() {
-    if (currentOperator === "div" && operands[1] === "0") {
+    if (currentOperator === "div" && operands[1] === "0") { // All this 
+        // chunk is for handling division by 0
         let everything = document.querySelectorAll("*"); 
         let body = document.querySelector("body"); 
         let all = body.querySelectorAll("*");
@@ -60,24 +61,26 @@ function resolve() {
         }, 2000);
         return;
     } 
-    let result = operate(operands[0], currentOperator, operands[1]);
-    screen.textContent = result; 
-    operands[0] = result;
-    currentOperator = "";
-    operands[1] = "";
+
+    if (Number.isInteger(Number(screen.textContent.at(-1)))){ // is the 
+        // last character on screen an integer?
+        let result = operate(operands[0], currentOperator, operands[1]);
+        screen.textContent = result; 
+        operands[0] = result;
+        currentOperator = "";
+        operands[1] = "";
+    } else {
+        screen.textContent = screen.textContent.slice(0, -2);
+        currentOperator = "";
+    }
+    
 }
 
 const operators = document.querySelectorAll(".operator");
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
-        console.log(screen.textContent)
         if (currentOperator !== "") {
-            if (Number.isInteger(Number(screen.textContent.at(-1)))){ // is the 
-                // last character on screen an integer?
-                resolve();
-            } else {
-                screen.textContent = screen.textContent.slice(0, -1);
-            }
+            resolve();
         }
         screen.textContent += " " + operator.textContent;
         currentOperator = operator.id;
