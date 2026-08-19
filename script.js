@@ -6,7 +6,9 @@ const screen = document.querySelector("#screen");
 const numbers = document.querySelectorAll(".number");
 numbers.forEach(number => {
     number.addEventListener("click", () => {
-        operands[currentOperator === "" ? 0 : 1] += number.textContent;
+        currentIndex = currentOperator === "" ? 0 : 1
+        screen.textContent += (operands[currentIndex] === "" ? " " : "") 
+        operands[currentIndex] += number.textContent;
         screen.textContent += number.textContent;
     });
 });
@@ -77,7 +79,7 @@ operators.forEach(operator => {
                 screen.textContent = screen.textContent.slice(0, -1);
             }
         }
-        screen.textContent += operator.textContent;
+        screen.textContent += " " + operator.textContent;
         currentOperator = operator.id;
     });
 });
