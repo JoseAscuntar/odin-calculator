@@ -1,4 +1,5 @@
 const DECIMAL_FIGURES = 10;
+let body = document.querySelector("body"); 
 let operands = ["", ""]; // Will literally only take 2 values, but looks nicer 
 // in array
 let currentOperator = "";
@@ -40,7 +41,6 @@ function resolve() {
     if (currentOperator === "div" && operands[1] === "0") { // All this 
         // chunk is for handling division by 0
         let everything = document.querySelectorAll("*"); 
-        let body = document.querySelector("body"); 
         let all = body.querySelectorAll("*");
         let niceTry = document.createElement("h1");
         let previousContent = screen.textContent; 
@@ -118,4 +118,35 @@ deleteButton.addEventListener('click', () => {
     // the if and the else look very alike, that difference on -3 and -2 really 
     // made it hard to mix it. The fact that Number.isInteger takes " " as an 
     // integer didn't help 
+});
+
+body.addEventListener('keydown', (event) => {
+    let key;
+    if (Number.isInteger(Number(event.key))) {
+        key = document.querySelector(`#${CSS.escape(event.key)}`);
+    } else {
+        switch(event.key) {
+            case "Backspace":
+                key = document.querySelector("#DEL");
+                break;
+            case "+":
+                key = document.querySelector("#add");
+                break;
+            case "-":
+                key = document.querySelector("#minus");
+                break;
+            case "/":
+                key = document.querySelector("#div");
+                break;
+            case "*":
+            case "x":
+                key = document.querySelector("#mult");
+                break;
+            case "Enter":
+            case "=":
+                key = document.querySelector("#equal");
+                break;
+        }
+    } 
+    key.click();
 });
