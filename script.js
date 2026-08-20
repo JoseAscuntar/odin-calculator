@@ -76,7 +76,6 @@ function resolve() {
         screen.textContent = screen.textContent.slice(0, -2);
         currentOperator = "";
     }
-    
 }
 
 const operators = document.querySelectorAll(".operator");
@@ -98,4 +97,25 @@ decimalDot.addEventListener("click", (event) => {
     if (!Array.from(screen.textContent).includes(".")) {
         updateData(event)
     }
+});
+
+const deleteButton = document.querySelector("#DEL");
+deleteButton.addEventListener('click', () => {
+    if (screen.textContent.at(-1) === " ") { // is the last
+        // character on screen an integer?
+        currentOperator = "";
+        screen.textContent = screen.textContent.slice(0, -3);
+    } else if (Number.isInteger(Number(screen.textContent.at(-1)))) {
+        currentIndex = currentOperator === "" ? 0 : 1;
+        operands[currentIndex] = operands[currentIndex].slice(0, -1);
+        screen.textContent = screen.textContent.slice(0, -1);
+    } else { // In case it is an operator
+        currentOperator = "";
+        screen.textContent = screen.textContent.slice(0, -2);
+    }
+
+    // I'm not sure if this is the easiest or proper way to do it, but although
+    // the if and the else look very alike, that difference on -3 and -2 really 
+    // made it hard to mix it. The fact that Number.isInteger takes " " as an 
+    // integer didn't help 
 });
