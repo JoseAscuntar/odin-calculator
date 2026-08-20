@@ -105,7 +105,8 @@ deleteButton.addEventListener('click', () => {
         // character on screen an integer?
         currentOperator = "";
         screen.textContent = screen.textContent.slice(0, -3);
-    } else if (Number.isInteger(Number(screen.textContent.at(-1)))) {
+    } else if (Number.isInteger(Number(screen.textContent.at(-1)))
+            || screen.textContent.at(-1) === ".") {
         currentIndex = currentOperator === "" ? 0 : 1;
         operands[currentIndex] = operands[currentIndex].slice(0, -1);
         screen.textContent = screen.textContent.slice(0, -1);
@@ -146,6 +147,9 @@ body.addEventListener('keydown', (event) => {
             case "=":
                 key = document.querySelector("#equal");
                 break;
+            case ".":
+                key = document.querySelector("#decimal");
+                break; 
         }
     } 
     key.click();
