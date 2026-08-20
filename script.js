@@ -69,7 +69,7 @@ function resolve() {
         // last character on screen an integer?
         let result = operate(operands[0], currentOperator, operands[1]);
         screen.textContent = Number(result.toFixed(DECIMAL_FIGURES)); 
-        operands[0] = result;
+        operands[0] = result.toString();
         currentOperator = "";
         operands[1] = "";
     } else {
